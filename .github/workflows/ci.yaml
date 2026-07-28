@@ -5,6 +5,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
+        with:
+          use-policy-store: true
+          egress-policy: audit
+          api-key: ${{ secrets.STEP_SECURITY_API_KEY }}
+
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup JDK
